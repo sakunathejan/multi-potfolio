@@ -9,7 +9,7 @@ export default function DownloadCV() {
         Interested in my background and experience? Download my latest CV to learn more about my skills, education, and projects.
       </p>
       <motion.a
-        href="../public/cv/Sakuna_Thejan_CV.pdf"
+        href="/public/cv/Sakuna_Thejan_CV.pdf"
         download
         className="inline-block px-8 py-3 bg-primary-600 text-white font-bold rounded shadow hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 transition focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 text-lg"
         whileHover={{ scale: 1.08 }}
