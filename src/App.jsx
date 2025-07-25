@@ -6,11 +6,13 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Header from './components/Header';
+import DownloadCV from './components/DownloadCV';
 
 const sections = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About Me' },
   { id: 'projects', label: 'Projects' },
+  { id: 'cv', label: 'Download CV' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -49,6 +51,9 @@ function AppContent() {
           </motion.section>
           <motion.section id="projects" className="py-16 scroll-mt-20" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 40 }} transition={{ duration: 0.7, delay: 0.2 }}>
             <Projects />
+          </motion.section>
+          <motion.section id="cv" className="py-16 scroll-mt-20" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 40 }} transition={{ duration: 0.7, delay: 0.25 }}>
+            <DownloadCV />
           </motion.section>
           <motion.section id="contact" className="py-16 scroll-mt-20" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 40 }} transition={{ duration: 0.7, delay: 0.3 }}>
             <Contact />
