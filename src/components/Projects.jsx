@@ -11,6 +11,7 @@ const projects = [
     icon: '🎧',
     color: 'from-indigo-500 to-blue-400',
   },
+  
 ];
 
 const cardContainer = {
