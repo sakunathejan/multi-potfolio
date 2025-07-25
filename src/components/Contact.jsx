@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from 'emailjs-com';
 
 const socials = [
   { name: 'LinkedIn', url: 'https://linkedin.com/in/sakuna-thejan-bb159a282', icon: (
@@ -16,6 +17,8 @@ const socials = [
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false); // Optional: for loading state
+  const formRef = useRef();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,8 +26,28 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2500);
+
+    setSending(true); // Optional: show loading state
+
+    // Replace these with your actual EmailJS values
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, USER_ID)
+      .then(
+        (result) => {
+          setSending(false);
+          setSubmitted(true);
+          setForm({ name: '', email: '', message: '' }); // Clear form fields
+          setTimeout(() => setSubmitted(false), 2500); // Revert after 2.5s
+        },
+        (error) => {
+          setSending(false);
+          alert('Failed to send message. Please try again.');
+          console.error('EmailJS error:', error); // <-- Add this line
+        }
+      );
   };
 
   return (
@@ -45,7 +68,11 @@ export default function Contact() {
         <p className="mb-6 text-gray-700 dark:text-gray-200 text-center max-w-xs">
           Feel free to reach out for collaborations, questions, or just to say hello!
         </p>
-        <form onSubmit={handleSubmit} className="w-full space-y-4">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="w-full space-y-4"
+        >
           <motion.input
             type="text"
             name="name"
@@ -81,8 +108,11 @@ export default function Contact() {
             className="w-full py-2 px-4 bg-purple-600 text-white font-bold rounded shadow hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 transition text-lg relative overflow-hidden"
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
+            disabled={sending} // Optional: disable while sending
           >
-            {submitted ? (
+            {sending ? (
+              <span>Sending...</span>
+            ) : submitted ? (
               <motion.span
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1.15 }}

@@ -31,3 +31,5 @@ Desktop.ini
 
 # Tailwind JIT cache
 .tailwindcss* 
+
+.env
