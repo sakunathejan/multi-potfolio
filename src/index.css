@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+}
+
+@layer utilities {
+  .text-primary-600 { @apply text-blue-600; }
+  .text-primary-700 { @apply text-blue-700; }
+  .text-primary-400 { @apply text-blue-400; }
+  .text-primary-300 { @apply text-blue-300; }
+  .bg-primary-600 { @apply bg-blue-600; }
+  .bg-primary-700 { @apply bg-blue-700; }
+  .bg-primary-500 { @apply bg-blue-500; }
+  .dark .bg-primary-500 { @apply bg-blue-500; }
+  .dark .bg-primary-600 { @apply bg-blue-600; }
+  .dark .text-primary-400 { @apply text-blue-400; }
+  .dark .text-primary-300 { @apply text-blue-300; }
+  .dark .text-primary-100 { @apply text-yellow-300; }
+} 
