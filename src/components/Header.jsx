@@ -124,7 +124,7 @@ export default function Header({ sections, onNav }) {
                 key={section.id}
                 onClick={() => {
                   setMenuOpen(false);
-                  onNav(section.id);
+                  setTimeout(() => onNav(section.id), 200);
                 }}
                 className="block w-full text-left px-2 py-3 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium text-lg"
               >
