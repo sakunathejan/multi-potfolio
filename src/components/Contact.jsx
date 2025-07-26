@@ -27,25 +27,32 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setSending(true); // Optional: show loading state
-
-    // Replace these with your actual EmailJS values
+    // Check if EmailJS environment variables are configured
     const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
 
+    if (!SERVICE_ID || !TEMPLATE_ID || !USER_ID) {
+      alert('EmailJS is not configured. Please contact me directly at sakunathejan@gmail.com or set up EmailJS environment variables in Netlify.');
+      console.error('Missing EmailJS environment variables:', { SERVICE_ID, TEMPLATE_ID, USER_ID });
+      return;
+    }
+
+    setSending(true);
+
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, USER_ID)
       .then(
         (result) => {
+          console.log('Email sent successfully:', result);
           setSending(false);
           setSubmitted(true);
           setForm({ name: '', email: '', message: '' }); // Clear form fields
           setTimeout(() => setSubmitted(false), 2500); // Revert after 2.5s
         },
         (error) => {
+          console.error('EmailJS error:', error);
           setSending(false);
-          alert('Failed to send message. Please try again.');
-          console.error('EmailJS error:', error); // <-- Add this line
+          alert('Failed to send message. Please try again or contact me directly at sakunathejan@gmail.com');
         }
       );
   };
